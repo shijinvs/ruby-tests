@@ -3,19 +3,12 @@ def day3p1(path)
 	x,y=0,0
 	santa[[x,y]] = +1
 	path.each_char do |c| 
-		if c=='^'
-			y+=1
-			santa[[x,y]]+=1
-		elsif c=='v'
-			y-=1
-			santa[[x,y]]+=1
-		elsif c=='<'
-			x-=1
-			santa[[x,y]]+=1
-		elsif c=='>'
-			x+=1
-			santa[[x,y]]+=1
-		end
+		y+=1 if c=='^'
+		y-=1 if c=='v'
+		x-=1 if c=='<'
+		x+=1 if c=='>'
+		santa[[x,y]]+=1
+		
 	end
 	puts santa.length
 end
