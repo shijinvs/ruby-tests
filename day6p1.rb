@@ -2,41 +2,33 @@ def day6p1(ins)
 	lights = Hash.new(0)
 	lit=0
 	ins.split("\n").each do |line|
-
-			from = line.match(/\d+,\d+/)[0]
-			to = line.match(/\d+,\d+$/)[0]
-			x1,y1 = from.split(",").map {|i| i.to_i}
-			x2,y2=to.split(",").map {|i| i.to_i}
-
-			if line.include? "on"
-				(x1...x2).each do |a|
-					(y1...y2).each do |j|
-						lights[[a,j]]= 1
-						end
-					end
-			elsif line.include? "off"
-				(x1...x2).each do |a|
-					(y1...y2).each do |j|
-						lights[[a,j]]= 0
-					end
-				end
-			elsif line.include? "toggle"
-				(x1...x2).each do |a|
-					(y1...y2).each do |j|
-						lights[[a,j]]= 1 if lights[[a,j]]== 0
-						lights[[a,j]]= 0 if lights[[a,j]]== 1
-					end
+		from = line.match(/\d+,\d+/)[0]
+		to = line.match(/\d+,\d+$/)[0]
+		x1,y1 = from.split(",").map {|i| i.to_i}
+		x2,y2 = to.split(",").map {|i| i.to_i}
+		if line.include? "turn on"
+			(x1..x2).each do |a|
+				(y1..y2).each do |j|
+					 lights[[a,j]] = 1
 				end
 			end
-		
+		elsif line.include? "turn off"
+			(x1..x2).each do |a|
+				(y1..y2).each do |j|
+					lights[[a,j]] = 0		
+				end
+			end
+		elsif line.include? "toggle"
+			(x1..x2).each do |a|
+				(y1..y2).each do |j|
+					lights[[a,j]] == 0 ? lights[[a,j]]=1 : lights[[a,j]]=0
+				end
+			end
+		end
 	end
-			lights.each do |k,v|
-			lit+=1 if v==1
-
-	end
-puts lit
+	lights.each {|k,v| lit+=1 if v==1}
+	puts lit
 end
-
 
 day6p1('turn on 489,959 through 759,964
 turn off 820,516 through 871,914
