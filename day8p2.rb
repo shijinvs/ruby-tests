@@ -3,12 +3,11 @@ def day8p1
 	DATA.each_line do |line|
 			line.chomp!
 			l1+=line.length
-			puts line.length
-			linenew=line.gsub(/(\\x..)|(\\")|(\\\\)/, '_')
-			l2+=(linenew.length)-2
-			puts (linenew.length)-2
+			linenew=line.inspect
+			l2+=(linenew.length)
 	end
-	puts l1-l2
+
+	puts l2-l1
 end
 
 day8p1
